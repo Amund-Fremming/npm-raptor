@@ -1,0 +1,30 @@
+{
+  "name": "dotnet-raptor",
+  "version": "1.0.0",
+  "description": "npm library for setting up a donet project, and generating folders and files.",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Amund-Fremming/npm-raptor.git"
+  },
+  "keywords": [
+    "npm",
+    "dotnet",
+    "automation"
+  ],
+  "author": "Amund Fremming",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Amund-Fremming/npm-raptor/issues"
+  },
+  "homepage": "https://github.com/Amund-Fremming/npm-raptor#readme",
+  "dependencies": {
+    "inquirer": "^9.2.14"
+  },
+  "bin": {
+    "dotnet-raptor": "./bin/cli.js"
+  }
+}
