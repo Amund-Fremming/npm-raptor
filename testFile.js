@@ -105,10 +105,12 @@ async function main() {
     console.error("Error while writing!");
   });
 
-  console.log("her!");
+  console.log("");
+  console.log("    Input array:");
   input.forEach((el) => {
-    console.log(el);
+    console.log("        - " + el);
   });
+  console.log("");
 }
 
 // Init
