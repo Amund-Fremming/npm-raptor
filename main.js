@@ -1,19 +1,21 @@
-const GenerateDontetProject = require("./functions/CLICommands");
+const generateDontetProject = require("./functions/CLICommands");
 const CLIHandler = require("./functions/CLIHandler");
-const GenerateFolders = require("./functions/FolderHandler");
+const generateFolders = require("./functions/FolderHandler");
+const generateFiles = require("./functions/FileHandler");
 
 async function main() {
   try {
-    await GenerateDontetProject();
+    await generateDontetProject();
 
     const handler = new CLIHandler();
     await handler.startCLI();
 
-    await GenerateFolders(handler.getUserInput());
+    console.log("Finishing build ...");
+
+    await generateFolders(handler.getUserInput());
+    await generateFiles(handler.getUserInput());
   } catch (error) {
-    console.error(
-      "An error occurred, check if its already a project named RaptorProject in you dir."
-    );
+    console.error(error);
   }
 }
 

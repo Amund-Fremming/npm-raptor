@@ -1,7 +1,8 @@
 const fs = require("fs");
 
-function GenerateFolders(modelNames) {
+function generateFolders(modelNames) {
   const folderPromises = modelNames.map((model) => createFolder(model));
+  folderPromises.push(createFolder("Data"));
 
   return Promise.all(folderPromises);
 }
@@ -19,4 +20,4 @@ function createFolder(name) {
   });
 }
 
-module.exports = GenerateFolders;
+module.exports = generateFolders;
