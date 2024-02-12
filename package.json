@@ -1,11 +1,10 @@
 {
   "name": "dotnet-raptor",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "npm library for setting up a donet project, and generating folders and files.",
   "main": "main.js",
   "scripts": {
-    "start": "node main.js",
-    "postinstall": "npm start"
+    "start": "node main.js"
   },
   "repository": {
     "type": "git",
