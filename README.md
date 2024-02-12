@@ -1,4 +1,4 @@
-# npm-raptor
+# npm dotnet-raptor
 
 ### How to use
 
