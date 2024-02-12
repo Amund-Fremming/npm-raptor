@@ -2720,11 +2720,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/AmundFremming/Personlig/Prosjekter/dotnet-raptor/RaptorProject/RaptorProject.csproj",
+      "projectUniqueName": "/Users/AmundFremming/Personlig/Prosjekter/dotnet-raptor/RaptorProject.csproj",
       "projectName": "RaptorProject",
-      "projectPath": "/Users/AmundFremming/Personlig/Prosjekter/dotnet-raptor/RaptorProject/RaptorProject.csproj",
+      "projectPath": "/Users/AmundFremming/Personlig/Prosjekter/dotnet-raptor/RaptorProject.csproj",
       "packagesPath": "/Users/AmundFremming/.nuget/packages/",
-      "outputPath": "/Users/AmundFremming/Personlig/Prosjekter/dotnet-raptor/RaptorProject/obj/",
+      "outputPath": "/Users/AmundFremming/Personlig/Prosjekter/dotnet-raptor/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/AmundFremming/.nuget/NuGet/NuGet.Config"
