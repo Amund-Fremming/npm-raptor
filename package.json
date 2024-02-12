@@ -1,10 +1,10 @@
 {
   "name": "dotnet-raptor",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "npm library for setting up a donet project, and generating folders and files.",
-  "main": "main.js",
+  "main": "./main.js",
   "scripts": {
-    "start": "node main.js"
+    "start": "node ./node_modules/dotnet-raptor/main.js"
   },
   "repository": {
     "type": "git",
@@ -26,6 +26,6 @@
     "inquirer": "^9.2.14"
   },
   "bin": {
-    "dotnet-raptor": "./bin/cli.js"
+    "dotnet-raptor": "./main.js"
   }
 }
