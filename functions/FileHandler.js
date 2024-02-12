@@ -212,7 +212,7 @@ async function createProgramFile(modelNames) {
     writeStream.write(`if (app.Environment.IsDevelopment())\n`);
     writeStream.write(`{\n`);
     writeStream.write(`    app.UseSwagger();\n`);
-    writeStream.write(`    app.UseSwagger();\n`);
+    writeStream.write(`    app.UseSwaggerUI();\n`);
     writeStream.write(`}\n\n`);
 
     writeStream.write(`app.UseHttpsRedirection();\n`);
