@@ -4,8 +4,8 @@
   "description": "npm library for setting up a donet project, and generating folders and files.",
   "main": "main.js",
   "scripts": {
-    "npm start": "node main.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node main.js",
+    "postinstall": "npm start"
   },
   "repository": {
     "type": "git",
