@@ -1,9 +1,10 @@
 {
   "name": "dotnet-raptor",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "npm library for setting up a donet project, and generating folders and files.",
   "main": "main.js",
   "scripts": {
+    "npm start": "node main.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -22,6 +23,7 @@
   },
   "homepage": "https://github.com/Amund-Fremming/npm-raptor#readme",
   "dependencies": {
+    "dotnet-raptor": "^1.0.0",
     "inquirer": "^9.2.14"
   },
   "bin": {
