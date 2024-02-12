@@ -1,9 +1,15 @@
 # npm dotnet-raptor
 
-### How to use
+#### Installation
 
 ```sh
 npm install -g dotnet-raptor
+```
+
+#### Usage
+
+```sh
+dotnet-raptor start
 ```
 
 ### About
