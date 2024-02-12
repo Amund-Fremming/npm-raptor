@@ -1,5 +1,13 @@
 # npm-raptor
 
+### How to use
+
+```sh
+npm install -g dotnet-raptor
+```
+
+### About
+
 - Simple tool for generating folders and files for dotnet projects.
 - The library will also update you Program.cs file with:
   - Service registration
