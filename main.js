@@ -10,10 +10,10 @@ async function main() {
     const handler = new CLIHandler();
     await handler.startCLI();
 
-    console.log("Finishing build ...");
-
     await generateFolders(handler.getUserInput());
     await generateFiles(handler.getUserInput());
+
+    console.log("Finishing build ...");
   } catch (error) {
     console.error(error);
   }

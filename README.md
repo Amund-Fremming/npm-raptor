@@ -19,3 +19,9 @@
   - SwashBuckle
   - Identity model tokens
   - JwtBearer
+
+## Mangler
+
+- Fikse opp Program.cs filen
+- Kanskje lage noe basic operasjoner? Vanskelig pga koblingstabeller??
+- Skall til controllere?

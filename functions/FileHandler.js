@@ -17,6 +17,7 @@ async function createFilesFor(name, modelNames) {
     await createService(name);
     await createController(name);
     await createDbContext(name, modelNames);
+    await createProgramFile(modelNames);
   } catch (error) {
     console.error(`Error in createFilesFor: ${error}`);
     throw error;
@@ -46,10 +47,12 @@ async function createRepository(name) {
       `${PATH_BASE}/${name}/${name}Repository.cs`
     );
 
-    writeStream.write("using System;\n\n");
+    writeStream.write("using System;\n");
+    writeStream.write("using Data;\n\n");
     writeStream.write(`namespace ${name}Entity;\n\n`);
-    writeStream.write(`public class ${name}Repository\n`);
-    writeStream.write(`{\n\n`);
+    writeStream.write(`public class ${name}Repository(AppDbContext context)\n`);
+    writeStream.write(`{\n`);
+    writeStream.write(`    public readonly AppDbContext _context = context;\n`);
     writeStream.write(`}`);
 
     writeStream.end();
@@ -62,12 +65,12 @@ async function createRepository(name) {
 async function createInterface(name) {
   try {
     const writeStream = fs.createWriteStream(
-      `${PATH_BASE}/${name}/I${name}.cs`
+      `${PATH_BASE}/${name}/I${name}Service.cs`
     );
 
     writeStream.write("using System;\n\n");
     writeStream.write(`namespace ${name}Entity;\n\n`);
-    writeStream.write(`public class I${name}\n`);
+    writeStream.write(`public interface I${name}Service\n`);
     writeStream.write(`{\n\n`);
     writeStream.write(`}`);
 
@@ -87,7 +90,7 @@ async function createService(name) {
     writeStream.write("using System;\n\n");
     writeStream.write(`namespace ${name}Entity;\n\n`);
     writeStream.write(
-      `public class ${name}Service(${name}Repository ${name.toLowerCase()}Repository)\n`
+      `public class ${name}Service(${name}Repository ${name.toLowerCase()}Repository) : I${name}Service\n`
     );
     writeStream.write(`{\n`);
     writeStream.write(
@@ -115,11 +118,11 @@ async function createController(name) {
     writeStream.write(`[ApiController]\n`);
     writeStream.write(`[Route("api/[controller]")]\n`);
     writeStream.write(
-      `public class ${name}Controller(${name}Service ${name.toLowerCase()}Service) : ControllerBase\n`
+      `public class ${name}Controller(I${name}Service ${name.toLowerCase()}Service) : ControllerBase\n`
     );
     writeStream.write(`{\n`);
     writeStream.write(
-      `    public readonly ${name}Service _${name.toLowerCase()}Service = ${name.toLowerCase()}Service;\n`
+      `    public readonly I${name}Service _${name.toLowerCase()}Service = ${name.toLowerCase()}Service;\n`
     );
 
     writeStream.write(`}`);
@@ -134,7 +137,7 @@ async function createController(name) {
 async function createDbContext(name, modelNames) {
   try {
     const writeStream = fs.createWriteStream(
-      `${PATH_BASE}/Data/AppDBContext.cs`
+      `${PATH_BASE}/Data/AppDbContext.cs`
     );
 
     writeStream.write("using System;\n");
@@ -163,6 +166,64 @@ async function createDbContext(name, modelNames) {
     writeStream.end();
   } catch (error) {
     console.error(`Error in createService: ${error}`);
+    throw error;
+  }
+}
+
+async function createProgramFile(modelNames) {
+  try {
+    const writeStream = fs.createWriteStream(`${PATH_BASE}/Program.cs`);
+
+    writeStream.write(`using Microsoft.EntityFrameworkCore;\n`);
+    modelNames.forEach((model) => {
+      writeStream.write(`using ${model}Entity;\n`);
+    });
+    writeStream.write(`\n`);
+
+    writeStream.write(`var builder = WebApplication.CreateBuilder(args);\n\n`);
+    writeStream.write(`builder.Services.AddEndpointsApiExplorer();\n`);
+    writeStream.write(`builder.Services.AddSwaggerGen();\n`);
+    writeStream.write(`builder.Services.AddControllers();\n\n`);
+
+    modelNames.forEach((model) => {
+      writeStream.write(`builder.Services.AddScoped<${model}Repository>();\n`);
+    });
+    writeStream.write(`\n`);
+
+    modelNames.forEach((model) => {
+      writeStream.write(
+        `builder.Services.AddScoped<I${model}Service, ${model}Service>();\n`
+      );
+    });
+    writeStream.write(`\n`);
+
+    writeStream.write(
+      `builder.Services.AddDbContext<Data.AppDbContext>(options =>\n`
+    );
+    writeStream.write(`{\n`);
+    writeStream.write(
+      `    var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");\n`
+    );
+    writeStream.write(`    options.UseNpgsql(connectionString);\n`);
+    writeStream.write(`});\n\n`);
+
+    writeStream.write(`var app = builder.Build();\n\n`);
+
+    writeStream.write(`if (app.Environment.IsDevelopment())\n`);
+    writeStream.write(`{\n`);
+    writeStream.write(`    app.UseSwagger();\n`);
+    writeStream.write(`    app.UseSwagger();\n`);
+    writeStream.write(`}\n\n`);
+
+    writeStream.write(`app.UseHttpsRedirection();\n`);
+    writeStream.write(`app.UseAuthorization();\n`);
+    writeStream.write(`app.MapControllers();\n\n`);
+
+    writeStream.write(`app.Run();`);
+
+    writeStream.end();
+  } catch (error) {
+    console.error(`Error in createProgramFile: ${error}`);
     throw error;
   }
 }
